@@ -8,7 +8,7 @@ export default defineConfig({
   },
   vite: {
     define: {
-      'import.meta.env.FORMSPREE_FORM_ID': JSON.stringify(process.env.FORMSPREE_FORM_ID || 'YOUR_FORM_ID')
+      __FORMSPREE_FORM_ID__: JSON.stringify(process.env.FORMSPREE_FORM_ID || 'myzdwkdl')
     }
   }
 });

@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const formspreeFormId = import.meta.env.FORMSPREE_FORM_ID || 'YOUR_FORM_ID';
+// Get Formspree form ID from build-time variable
+const formspreeFormId = __FORMSPREE_FORM_ID__;
 const formAction = `https://formspree.io/f/${formspreeFormId}`;
 ---
 
