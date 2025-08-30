@@ -231,11 +231,16 @@ const formAction = `https://formspree.io/f/${formspreeFormId}`;
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('contact-form');
-  const messagesDiv = document.getElementById('form-messages');
-  const submitBtn = form.querySelector('.submit-btn');
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const messagesDiv = document.getElementById('form-messages') as HTMLDivElement;
+  const submitBtn = form?.querySelector('.submit-btn') as HTMLButtonElement;
   
-  form.addEventListener('submit', async function(e) {
+  if (!form || !messagesDiv || !submitBtn) {
+    console.error('Contact form elements not found');
+    return;
+  }
+  
+  form.addEventListener('submit', async function(e: Event) {
     e.preventDefault();
     
     // Show loading state
@@ -262,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         const data = await response.json();
         if (data.errors) {
-          showMessage('error', 'Please fix the following errors: ' + data.errors.map(error => error.message).join(', '));
+          showMessage('error', 'Please fix the following errors: ' + data.errors.map((error: any) => error.message).join(', '));
         } else {
           showMessage('error', 'Oops! There was a problem sending your message. Please try again.');
         }
@@ -276,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  function showMessage(type, message) {
+  function showMessage(type: string, message: string): void {
     messagesDiv.textContent = message;
     messagesDiv.className = `form-messages ${type}`;
     messagesDiv.style.display = 'block';
