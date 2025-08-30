@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const aboutPage = await getEntry('pages', 'about');
+const { Content } = await aboutPage.render();
+---
+
+<BaseLayout title={aboutPage.data.title} description={aboutPage.data.description}>
+  <div class="prose">
+    <Content />
+  </div>
+</BaseLayout>
+
+<style>
+  .prose {
+    line-height: 1.7;
+    color: #444;
+    max-width: 800px;
+  }
+  
+  .prose h1 {
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .prose p {
+    margin-bottom: 1rem;
+  }
+  
+  .prose a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .prose a:hover {
+    text-decoration: underline;
+  }
+  
+  .prose ul,
+  .prose ol {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+  }
+  
+  .prose li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .prose strong {
+    color: #333;
+  }
+  
+  .prose code {
+    background: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+</style>
