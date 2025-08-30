@@ -6,13 +6,9 @@ export default defineConfig({
   build: {
     assets: 'assets'
   },
-  env: {
-    schema: {
-      FORMSPREE_FORM_ID: {
-        context: 'client',
-        access: 'public',
-        optional: true
-      }
+  vite: {
+    define: {
+      'import.meta.env.FORMSPREE_FORM_ID': JSON.stringify(process.env.FORMSPREE_FORM_ID || 'YOUR_FORM_ID')
     }
   }
 });
