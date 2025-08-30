@@ -13,8 +13,8 @@ Personal website built with [Astro](https://astro.build) and hosted on GitHub Pa
 - **Hosting:** GitHub Pages
 - **Domain:** https://hardcodedlife.github.io
 - **Content:** Markdown files with frontmatter
-- **Comments:** Giscus (GitHub Discussions)
-- **Contact Forms:** Formspree/Netlify Forms
+- **Comments:** Giscus (GitHub Discussions) - *To be implemented*
+- **Contact Forms:** Formspree - *Fully implemented*
 
 ## Development
 
@@ -45,7 +45,7 @@ Simple Git-based workflow:
 - ✅ **Home Page** - Welcome section with recent blog posts
 - ✅ **Blog System** - Full blog with individual post pages
 - ✅ **About Page** - Personal information and background
-- ✅ **Contact Page** - Contact methods and form template
+- ✅ **Contact Page** - Contact methods with working Formspree form
 - ✅ **Responsive Design** - Clean, professional styling
 - ✅ **GitHub Actions** - Automated deployment
 - ✅ **TypeScript** - Full type safety and validation
@@ -60,7 +60,20 @@ src/
 ├── components/      # Astro components (ready for custom components)
 ├── layouts/         # Page templates (BaseLayout, BlogPost)
 └── pages/           # Routes and special pages
+    └── contact/
+        └── success.astro  # Form submission success page
 ```
+
+## Contact Form
+
+The contact form is fully integrated with Formspree:
+
+- **Endpoint:** `https://formspree.io/f/myzdwkdl`
+- **Features:** AJAX submission, success/error handling, spam protection
+- **Environment:** Form ID configured in `.env` file
+- **Fallback:** Success page for users without JavaScript enabled
+
+To modify the form, edit `src/pages/contact.astro`. The form ID is stored in the `FORMSPREE_FORM_ID` environment variable.
 
 ## Next Steps
 
@@ -68,4 +81,5 @@ src/
 2. **Commit and push** to deploy your live site
 3. **Add content** - Create new blog posts in `src/content/blog/`
 4. **Customize** - Update contact information and about page
-5. **Integrate services** - Set up contact forms and comments
+5. **Test contact form** - Verify form submissions are working
+6. **Add comments** - Set up Giscus for blog comments
