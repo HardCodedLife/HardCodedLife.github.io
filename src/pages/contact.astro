@@ -265,8 +265,14 @@ document.addEventListener('DOMContentLoaded', function() {
       if (response.ok) {
         showMessage('success', 'Thank you for your message! I\'ll get back to you soon.');
         form.reset();
+      } else if (response.status === 403) {
+        // CAPTCHA required - fall back to normal form submission
+        showMessage('error', 'CAPTCHA verification required. Redirecting to complete submission...');
+        setTimeout(() => {
+          form.submit(); // This will redirect to Formspree with CAPTCHA
+        }, 2000);
       } else {
-        const data = await response.json();
+        const data = await response.json().catch(() => ({}));
         if (data.errors) {
           showMessage('error', 'Please fix the following errors: ' + data.errors.map((error: any) => error.message).join(', '));
         } else {
@@ -274,7 +280,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     } catch (error) {
-      showMessage('error', 'Oops! There was a problem sending your message. Please check your connection and try again.');
+      // Network error or CAPTCHA challenge - fall back to normal submission
+      showMessage('error', 'Redirecting to complete your message submission...');
+      setTimeout(() => {
+        form.submit(); // This will redirect to Formspree with CAPTCHA
+      }, 2000);
     } finally {
       // Reset button state
       submitBtn.disabled = false;
